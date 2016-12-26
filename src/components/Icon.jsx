@@ -9,4 +9,12 @@ const Icon = ({ link, icon, size, color, style }) => (
   </a>
 );
 
+Icon.propTypes = {
+  link: PropTypes.string,
+  icon: PropTypes.string,
+  size: PropTypes.string,
+  color: PropTypes.string,
+  style: PropTypes.object,
+};
+
 export default Icon;
