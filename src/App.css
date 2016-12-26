@@ -1,0 +1,11 @@
+.App-heading {
+  text-align: left;
+  position: absolute;
+  bottom: 100px;
+  left: 100px;
+}
+
+.App-hero {
+  height: 100vh;
+  position: relative;
+}
