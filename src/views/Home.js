@@ -22,6 +22,9 @@ const socialAccounts = [
 const Home = () => (
   <div>
     <div className="App-hero">
+      <video autoPlay loop>
+        <source src="/hero.mp4" type="video/mp4" />
+      </video>
     </div>
     <div className="App-heading">
       <h1>Marcus Bernales</h1>
