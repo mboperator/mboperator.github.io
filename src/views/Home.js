@@ -2,6 +2,7 @@ import React from 'react';
 import Rx from 'rxjs';
 
 import Torn from './Torn';
+import God from './God';
 
 const scrollDecorator = Component =>
   class Connected extends React.Component {
@@ -43,6 +44,7 @@ const Home = ({ headerWidth, scrollPercentage }) => (
         height: '100vh',
         overflow: 'hidden',
         position: 'fixed',
+        zIndex: 10,
       }}
     >
       <div style={{ height: '100%', width: '100%', position: 'relative' }}>
@@ -51,13 +53,19 @@ const Home = ({ headerWidth, scrollPercentage }) => (
         </video>
         <div className="App-heading">
           <h1>Marcus Bernales</h1>
-          <h3>Frontend Developer</h3>
-          <h3>Making software for humanity</h3>
+          <h3>for the love of humanity</h3>
         </div>
       </div>
     </div>
-    <div style={{ paddingLeft: `80vw` }}>
+    <div style={{
+      paddingLeft: '80vw',
+      height: '100vh',
+      zIndex: 5,
+      flexDirection: 'row',
+      display: 'flex',
+    }}>
       <Torn />
+      <God />
     </div>
   </div>
 );
