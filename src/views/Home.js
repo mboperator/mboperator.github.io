@@ -1,49 +1,65 @@
 import React from 'react';
-import Icon from '../components/Icon';
+import Rx from 'rxjs';
 
-const socialAccounts = [
-  {
-    icon: 'twitter',
-    link: 'https://www.twitter.com/marcusbernales',
-    color: 'blue',
-  },
-  {
-    icon: 'facebook',
-    link: 'https://www.facebook.com/mboprtr',
-    color: 'blue',
-  },
-  {
-    icon: 'github',
-    link: 'https://www.github.com/mboperator/',
-    color: 'black',
-  },
-];
+import Torn from './Torn';
 
-const Home = () => (
-  <div>
-    <div className="App-hero">
-      <video autoPlay loop>
-        <source src="/hero.mp4" type="video/mp4" />
-      </video>
-    </div>
-    <div className="App-heading">
-      <h1>Marcus Bernales</h1>
-      <h3>Frontend Developer</h3>
-      <h3>Making software for humanity</h3>
-      <div className="App-social-icons">
-        {socialAccounts.map(account =>
-          <Icon
-            key={account.link}
-            link={account.link}
-            icon={account.icon}
-            color={account.color}
-            size="25px"
-            style={{ padding: '5px' }}
-          />
-        )}
+const scrollDecorator = Component =>
+  class Connected extends React.Component {
+    constructor(...args) {
+      super(...args);
+
+      this.state = { scrollPercentage: 0, headerWidth: 100, sticky: false };
+    }
+    componentDidMount() {
+      const scroll$ = Rx.Observable.fromEvent(document, 'scroll');
+      scroll$
+        .map(() => {
+          const scrollPercentage = (document.body.scrollLeft / document.body.clientWidth) * 2;
+          const headerWidth = Math.max(1 - scrollPercentage, 0.2) * 100;
+          return {
+            scrollPercentage,
+            headerWidth,
+          };
+        })
+        .subscribe(state => this.setState(state));
+    }
+
+    render() {
+      return (
+        <Component
+          scrollPercentage={this.state.headerWidth}
+          headerWidth={this.state.headerWidth}
+          sticky={this.state.sticky}
+        />
+      );
+    }
+  };
+
+const Home = ({ headerWidth, scrollPercentage }) => (
+  <div style={{ display: 'flex', flexDirection: 'row' }}>
+    <div
+      style={{
+        width: `${headerWidth}vw`,
+        height: '100vh',
+        overflow: 'hidden',
+        position: 'fixed',
+      }}
+    >
+      <div style={{ height: '100%', width: '100%', position: 'relative' }}>
+        <video autoPlay loop>
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
+        <div className="App-heading">
+          <h1>Marcus Bernales</h1>
+          <h3>Frontend Developer</h3>
+          <h3>Making software for humanity</h3>
+        </div>
       </div>
+    </div>
+    <div style={{ paddingLeft: `80vw` }}>
+      <Torn />
     </div>
   </div>
 );
 
-export default Home;
+export default scrollDecorator(Home);
