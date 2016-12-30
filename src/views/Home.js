@@ -53,7 +53,7 @@ const Home = ({ headerWidth, scrollPercentage }) => (
         </video>
         <div className="App-heading">
           <h1>Marcus Bernales</h1>
-          <h3>for the love of humanity</h3>
+          <h3>for the love of us</h3>
         </div>
       </div>
     </div>
