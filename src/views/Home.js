@@ -1,72 +1,64 @@
 import React from 'react';
-import Rx from 'rxjs';
 
 import Torn from './Torn';
 import God from './God';
+import SiteSection from '../components/SiteSection';
 
-const scrollDecorator = Component =>
-  class Connected extends React.Component {
-    constructor(...args) {
-      super(...args);
+import scrollDecorator from '../decorators/pageScroll';
 
-      this.state = { scrollPercentage: 0, headerWidth: 100, sticky: false };
-    }
-    componentDidMount() {
-      const scroll$ = Rx.Observable.fromEvent(document, 'scroll');
-      scroll$
-        .map(() => {
-          const scrollPercentage = (document.body.scrollLeft / document.body.clientWidth) * 2;
-          const headerWidth = Math.max(1 - scrollPercentage, 0.2) * 100;
-          return {
-            scrollPercentage,
-            headerWidth,
-          };
-        })
-        .subscribe(state => this.setState(state));
-    }
+const TrapTears = () => (
+  <div style={{ height: '100%', width: '100%', position: 'relative' }}>
+    <video autoPlay loop>
+      <source src="/musings.mp4" type="video/mp4" />
+    </video>
+    <div className="App-heading">
+      <h1>Marcus Bernales</h1>
+      <h3>reflections and thoughts</h3>
+    </div>
+  </div>
+);
 
-    render() {
-      return (
-        <Component
-          scrollPercentage={this.state.headerWidth}
-          headerWidth={this.state.headerWidth}
-          sticky={this.state.sticky}
-        />
-      );
-    }
-  };
+const Enlighten = () => (
+  <div
+    style={{
+      height: '100%',
+      width: '100%',
+      backgroundImage: 'url(/opensource.jpg)',
+      backgroundSize: 'cover',
+      position: 'relative',
+    }}
+  >
+    <div className="App-heading">
+      <h1>Marcus Bernales</h1>
+      <h3>technology for humans</h3>
+    </div>
+  </div>
+);
 
-const Home = ({ headerWidth, scrollPercentage }) => (
-  <div style={{ display: 'flex', flexDirection: 'row' }}>
-    <div
+const Home = ({ headerHeight, headerWidth }) => (
+  <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <SiteSection
+      header={Enlighten}
       style={{
         width: `${headerWidth}vw`,
-        height: '100vh',
-        overflow: 'hidden',
-        position: 'fixed',
-        zIndex: 10,
+        height: `${headerHeight}vh`,
+        top: '0vh',
       }}
     >
-      <div style={{ height: '100%', width: '100%', position: 'relative' }}>
-        <video autoPlay loop>
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-        <div className="App-heading">
-          <h1>Marcus Bernales</h1>
-          <h3>for the love of us</h3>
-        </div>
-      </div>
-    </div>
-    <div style={{
-      paddingLeft: '80vw',
-      height: '100vh',
-      zIndex: 5,
-      flexDirection: 'row',
-      display: 'flex',
-    }}>
       <Torn />
       <God />
-    </div>
+    </SiteSection>
+    <SiteSection
+      header={TrapTears}
+      style={{
+        width: `${headerWidth}vw`,
+        height: `${100 - headerHeight}vh`,
+        bottom: '0vh',
+      }}
+    >
+      <Torn />
+      <God />
+    </SiteSection>
   </div>
 );
 
