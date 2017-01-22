@@ -11,11 +11,13 @@ import './App.css';
 
 const store = createStore(appModule.reducer);
 
+const PartiallyAppliedHome = () => <Home initialPositionTop={50}/>
+
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <div className="App">
-        <Match exactly pattern="/" component={Home} />
+        <Match exactly pattern="/" component={PartiallyAppliedHome} />
       </div>
     </BrowserRouter>
   </Provider>

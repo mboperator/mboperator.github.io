@@ -12,9 +12,18 @@ const scrollDecorator = Component =>
         headerWidth: 100,
         headerHeight: 100,
         sticky: false,
+        initialMountComplete: false,
       };
     }
+
     componentDidMount() {
+      if (this.props.initialPositionTop && !this.state.initialMountComplete) {
+        const newY = (this.props.initialPositionTop / 100) * document.body.clientHeight;
+
+        window.scrollTo(0, newY / 2);
+        this.setState({ initialMountComplete: true });
+      }
+
       const scroll$ = Rx.Observable.fromEvent(document, 'scroll');
       scroll$
         .map(() => {
