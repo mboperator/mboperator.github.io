@@ -32,7 +32,7 @@ const wrapSlowPan = Component =>
         this.setState(({ x, y, direction: currentDirection }) => {
           let direction = currentDirection;
 
-          if (x < -2500 && (currentDirection === 'negative')) {
+          if (x < -1500 && (currentDirection === 'negative')) {
             direction = 'positive';
           }
 
@@ -76,7 +76,7 @@ const Enlighten = ({ coordinates }) => (
       color: 'rgba(255, 255, 255, 0.66)',
       mixBlendMode: 'exclusion',
     }}>
-      <h3>technology for humans</h3>
+      <h3>technology</h3>
     </div>
   </div>
 );
