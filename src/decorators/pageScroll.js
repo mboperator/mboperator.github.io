@@ -27,17 +27,21 @@ const scrollDecorator = Component =>
       const scroll$ = Rx.Observable.fromEvent(document, 'scroll');
       scroll$
         .map(() => {
-          const horizontalScrollPercentage = (document.body.scrollLeft / document.body.clientWidth) * 2;
-          const verticalScrollPercentage = (document.body.scrollTop / document.body.clientHeight) * 2;
-          const headerHeight = (1 - verticalScrollPercentage) * 100;
+          const horizontalScrollPercentage = (window.scrollX / document.body.clientWidth) * 2;
+          const verticalScrollPercentage = (window.scrollY / document.body.clientHeight) * 2;
+          const headerHeight = Math.floor((1 - verticalScrollPercentage) * 100);
           const headerWidth = Math.max(1 - horizontalScrollPercentage, 0.2) * 100;
           return {
             horizontalScrollPercentage,
             headerWidth,
             headerHeight,
+            verticalScrollPercentage,
           };
         })
-        .subscribe(state => this.setState(state));
+        .subscribe(state => {
+          console.log('state', state);
+          this.setState(state);
+        });
     }
 
     render() {
