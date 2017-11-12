@@ -34,6 +34,7 @@ class App extends React.Component {
               color: white;
               background-color: black;
               mix-blend-mode: overlay;
+              font-size: 1.5em;
             }
 
             .content {
@@ -71,6 +72,7 @@ class App extends React.Component {
             }
 
             h1 { margin: 0.2em 0; }
+            a:visited { color: black; }
           `}
         </style>
 
@@ -86,20 +88,33 @@ class App extends React.Component {
               <h1>I'm Marcus</h1>
             </div>
             <div className="subtitle">
-              I create tools and products that make people more effective.
+              I create tools and products that make people more effective
             </div>
             <ul className="links">
               <li>
-                <i className="fa fa-github" />
+                <a href="/blog">
+                  <i className="fa fa-book" />
+                </a>
               </li>
               <li>
-                <i className="fa fa-linkedin" />
+                <a target="_blank" href="https://github.com/mboperator">
+                  <i className="fa fa-github" />
+                </a>
               </li>
               <li>
-                <i className="fa fa-twitter" />
+                <a target="_blank" href="https://www.linkedin.com/in/marcus-bernales-71b2284b">
+                  <i className="fa fa-linkedin" />
+                </a>
               </li>
               <li>
-                <i className=" fa fa-instagram" />
+                <a target="_blank" href="https://twitter.com/mpowered__">
+                  <i className="fa fa-twitter" />
+                </a>
+              </li>
+              <li>
+                <a target="_blank" href="https://www.instagram.com/mpowered__/">
+                  <i className=" fa fa-instagram" />
+                </a>
               </li>
             </ul>
           </div>
